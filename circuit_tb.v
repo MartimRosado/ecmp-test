@@ -17,7 +17,7 @@ module circuit_tb;
       en=1;
       for (i=0; i<100; i=i+1) begin
          @(posedge clk) #1 x = $random;
-         @(posedge clk) #1 $write("Max Number: %d\n", y);
+         $write("Gen number %d: %d\tMax Number: %d\n", i+1, x, y);
       end
 
       @(posedge clk) #200 $finish;
