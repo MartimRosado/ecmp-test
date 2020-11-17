@@ -10,8 +10,21 @@ module circuit
    `OUTPUT(y,32)
    );
 
-   `SIGNAL(acc, 32)
-   `ACC_ARE(clk, rst, 1'b0, en, acc, x)
-   `SIGNAL2OUT(y, acc)
-   
+   `SIGNAL(cnt, 32)
+   `SIGNAL(max, 32)
+   `SIGNAL(s_out, 32)
+
+   `REG_ARE(clk, rst, 1'b0, cnt!=99, s_out, max)
+   `SIGNAL2OUT(y, s_out)
+
+   //iteration counter
+   `COUNTER_ARE(clk, rst, cnt!=99, cnt)
+
+   `COMB begin
+   if (x > max) begin
+    max = x;
+    end else
+    max = s_out;
+   end
+
 endmodule

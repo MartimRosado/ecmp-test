@@ -10,19 +10,19 @@ module circuit_tb;
    `SIGNAL_OUT(y, 32)
 
    integer i;
-   
+
    initial begin
       $dumpfile("circuit.vcd");
       $dumpvars();
-      en=0;
+      en=1;
       for (i=0; i<100; i=i+1) begin
-         @(posedge clk) #1 x=i; en=1;
-         @(posedge clk) #1 en=0;
+         @(posedge clk) #1 x = $random;
+         @(posedge clk) #1 $write("Max Number: %d\n", y);
       end
 
-      @(posedge clk) #100 $finish;
+      @(posedge clk) #200 $finish;
 
-   end 
+   end
 
    circuit c0
      (
